@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import twitterImage from '../../image/twitter.jpeg';
 // import TwitterIcon from '@mui/icons-material/Twitter';
 import {useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth';
+import './login.css'
 import auth from '../../firebase.init';
+import GoogleButton from 'react-google-button'
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 const Signup = () => {
 
@@ -12,6 +16,8 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     // const[error, setError] = useState('');
+
+    const navigate = useNavigate();
     
     const [
         createUserWithEmailAndPassword,
@@ -20,8 +26,12 @@ const Signup = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
 
-    if(user){
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+    if(user || googleUser){
+        navigate('/');
         console.log(user);
+        console.log(googleUser);
     }
 
     if(error){
@@ -39,15 +49,22 @@ const Signup = () => {
 
     }
 
+    const handleGoogleSignIn = () => {
+        signInWithGoogle();
+    }
+
 
   return (
-    <div className='signup-container'>
+    <div className='login-container'>
             <div className='image-container'>
-                <img src={twitterImage} alt="" />
+                <img className='image' src={twitterImage} alt="" />
             </div>
             <div className='form-container'>
-                {/* < TwitterIcon /> */}
-                <h2>Happening now</h2>
+                <div className='form-box'>
+                {/* < TwitterIcon className='Twittericon' style={{ color: 'skyblue'}}/> */}
+                <h2 className='heading'>Happening now</h2>
+                <h3 className='heading1'>Join Twitter Today</h3>
+
                 <form onSubmit={handleSubmit} >
                     <input type="text" 
                      className='display-name'
@@ -71,11 +88,32 @@ const Signup = () => {
                         <button type='submit' className='btn'>SignUp</button>
                     </div>
                 </form>
+                <hr />
+                <div className='google-button'>
+                    <GoogleButton 
+                    className='g-btn'
+                    type='light'
+                    onClick={handleGoogleSignIn}
+                    />
+                </div>
+                <div>
+                    Already have an account?
+                    <Link
+                    to='/login'
+                    style={{
+                        textDecoration: 'none',
+                        color: 'skyblue',
+                        fontWeight: '600',
+                        marginLeft: '5px'
+                    }}>
+                    Login</Link>
+                </div>
+                </div>
             </div>
 
 
         </div>
   )
-}
+};
 
-export default Signup
+export default Signup;

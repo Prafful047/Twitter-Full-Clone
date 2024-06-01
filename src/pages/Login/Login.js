@@ -3,13 +3,18 @@ import twitterImage from '../../image/twitter.jpeg';
 // import TwitterIcon from '@mui/icons-material/Twitter';
 import {useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
-
+import './login.css'
+import GoogleButton from 'react-google-button'
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     // const[error, setError] = useState('');
+
+    const navigate = useNavigate();
     const [
         signInWithEmailAndPassword,
         user,
@@ -17,8 +22,12 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    if(user){
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+
+    if(user || googleUser){
+        navigate('/');
         console.log(user);
+        console.log(googleUser);
     }
 
     if(error){
@@ -36,14 +45,20 @@ const Login = () => {
 
     }
 
+    const handleGoogleSignIn = () => {
+        signInWithGoogle();
+    }
+
     return(
         <div className='login-container'>
             <div className='image-container'>
-                <img src={twitterImage} alt="" />
+                <img className='image' src={twitterImage} alt="" />
             </div>
             <div className='form-container'>
-                {/* < TwitterIcon /> */}
-                <h2>Happening now</h2>
+                <div className='form-box'>
+                {/* < TwitterIcon style= {{color: 'skyblue'}}/> */}
+                <h2 className='heading'>Happening now</h2>
+                <h3 className='heading1'>What Happening Today</h3>
                 <form onSubmit={handleSubmit} >
                     <input type="email"  
                     className='email' 
@@ -58,6 +73,27 @@ const Login = () => {
                         <button type='submit' className='btn'>Login</button>
                     </div>
                 </form>
+                <hr />
+                <div className='google-button'>
+                    <GoogleButton 
+                    className='g-btn'
+                    type='light'
+                    onClick={handleGoogleSignIn}
+                    />
+                </div>
+                <div>
+                    Dont have an account?
+                    <Link
+                    to='/signup'
+                    style={{
+                        textDecoration: 'none',
+                        color: 'skyblue',
+                        fontWeight: '600',
+                        marginLeft: '5px'
+                    }}>
+                    Sign Up</Link>
+                </div>
+                </div>
             </div>
 
 
