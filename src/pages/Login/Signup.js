@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import twitterImage from '../../image/twitter.jpeg';
-// import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import './login.css';
 import auth from '../../firebase.init';
@@ -54,7 +54,7 @@ const Signup = () => {
             </div>
             <div className='form-container'>
                 <div className='form-box'>
-                    {/* <TwitterIcon className='Twittericon' style={{ color: 'skyblue' }} /> */}
+                    <TwitterIcon className='Twittericon' style={{ color: 'skyblue' }} />
                     <h2 className='heading'>Happening now</h2>
                     <h3 className='heading1'>Join Twitter Today</h3>
                     <form onSubmit={handleSubmit}>
