@@ -12,31 +12,56 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MoreIcon from "@mui/icons-material/More";
 import DoneIcon from "@mui/icons-material/Done";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { Avatar, Button, Divider, IconButton, ListItemIcon, Menu, MenuItem } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import CustomLink from "./CustomLink";
 
-const Sidebar = ({handleLogout , user}) => {
+const Sidebar = ({ handleLogout, user }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
-  }
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
-  }
+  };
 
   return (
     <div className="sidebar">
       <TwitterIcon className="sidebar_twitterIcon" />
-      <SidebarOptions active Icon={HomeIcon} text="Home" />
-      <SidebarOptions active Icon={SearchIcon} text="Explore" />
-      <SidebarOptions active Icon={NotificationsIcon} text="Notifications" />
-      <SidebarOptions active Icon={MailOutlineIcon} text="Messages" />
-      <SidebarOptions active Icon={BookmarkBorderIcon} text="Bookmarks" />
-      <SidebarOptions active Icon={ListAltIcon} text="Lists" />
-      <SidebarOptions active Icon={PermIdentityIcon} text="Profile" />
-      <SidebarOptions active Icon={MoreIcon} text="More" />
+      <CustomLink to="/home/feed">
+        <SidebarOptions active Icon={HomeIcon} text="Home" />
+      </CustomLink>
+      <CustomLink to="/home/explore">
+        <SidebarOptions active Icon={SearchIcon} text="Explore" />
+      </CustomLink>
+      <CustomLink to="/home/notifications">
+        <SidebarOptions active Icon={NotificationsIcon} text="Notifications" />
+      </CustomLink>
+      <CustomLink to="/home/messages">
+        <SidebarOptions active Icon={MailOutlineIcon} text="Messages" />
+      </CustomLink>
+      <CustomLink to="/home/bookmarks">
+        <SidebarOptions active Icon={BookmarkBorderIcon} text="Bookmarks" />
+      </CustomLink>
+      <CustomLink to="/home/lists">
+        <SidebarOptions active Icon={ListAltIcon} text="Lists" />
+      </CustomLink>
+      <CustomLink to="/home/profile">
+        <SidebarOptions active Icon={PermIdentityIcon} text="Profile" />
+      </CustomLink>
+      <CustomLink to="/home/more">
+        <SidebarOptions active Icon={MoreIcon} text="More" />
+      </CustomLink>
 
       <Button variant="outlined" className="sidebar_tweet">
         Tweet
@@ -72,7 +97,9 @@ const Sidebar = ({handleLogout , user}) => {
                 <h4>Prafful Awadhiya</h4>
                 <h5>@Prafful</h5>
               </div>
-              <ListItemIcon className="done-icon"><DoneIcon /></ListItemIcon>
+              <ListItemIcon className="done-icon">
+                <DoneIcon />
+              </ListItemIcon>
             </div>
           </MenuItem>
           <Divider />
