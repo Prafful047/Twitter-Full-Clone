@@ -24,10 +24,10 @@
     margin-top: 0;
 }
 
-.tweetBox__imageInput {
+.imageIcon {
     border: none;
     padding: 5px 20px;
-}
+}    
 
 .imageIcon_tweetButton {
     display: flex;

@@ -15,7 +15,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
   Avatar,
   Button,
-  Divider, 
+  Divider,
   IconButton,
   ListItemIcon,
   Menu,
@@ -31,8 +31,6 @@ const Sidebar = ({ handleLogout, user }) => {
 
   // console.log(loggedInUser[0][0]?.name)
 
-  
-
   const userProfilePic = loggedInUser[0]?.profileImage
     ? loggedInUser[0]?.profileImage
     : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
@@ -45,9 +43,9 @@ const Sidebar = ({ handleLogout, user }) => {
     setAnchorEl(null);
   };
 
+  // console.log(loggedInUser[0][0].profileImage);
 
   const result = user[0]?.email?.split("@")[0];
-
 
   return (
     <div className="sidebar">
@@ -82,13 +80,12 @@ const Sidebar = ({ handleLogout, user }) => {
       </Button>
 
       <div className="Profile_info">
-        <Avatar src={userProfilePic} />
+        <Avatar src={loggedInUser[0][0]?.profileImage ? loggedInUser[0][0]?.profileImage : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
         <div className="user_info">
           <h4>
-            {
-              loggedInUser[0][0]?.name ? (loggedInUser[0][0]?.name) : (user && user[0]?.displayName)
-            }
-            
+            {loggedInUser[0][0]?.name
+              ? loggedInUser[0][0]?.name
+              : user && user[0]?.displayName}
           </h4>
           <h5>@{result}</h5>
         </div>
@@ -110,14 +107,13 @@ const Sidebar = ({ handleLogout, user }) => {
           onClose={handleClose}
         >
           <MenuItem className="Profile_info1">
-            <Avatar src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" />
+            <Avatar src={loggedInUser[0][0]?.profileImage ? loggedInUser[0][0]?.profileImage : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
             <div className="user_info subUser_info">
               <div className="user_info">
                 <h4>
-                  {loggedInUser[0][0]?.name
-                    ? loggedInUser[0][0]?.name
+                  {loggedInUser[0]?.name
+                    ? loggedInUser[0]?.name
                     : user && user[0]?.displayName}
-                  
                 </h4>
                 <h5>@{result}</h5>
               </div>
